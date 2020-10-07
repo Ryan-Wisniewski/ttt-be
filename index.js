@@ -45,10 +45,8 @@ wsServer.on('request', (request) => {
             let currentTurn = newData.turn
             // console.log('Recieved turn', each.utf8Data, currentTurn)
             if(currentTurn === 1){
-                // console.log('REEEEE')
                 currentTurn = 0
             } else if(currentTurn === 0){
-                // console.log('2REEEEEEEEE')
                 currentTurn = 1
             }
             if(newData.board !== board){
