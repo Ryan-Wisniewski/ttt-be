@@ -36,7 +36,7 @@ wsServer.on('request', (request) => {
     console.log('connected: ' + userID + 'in' + Object.getOwnPropertyNames(client))
     for(key in client){
         client[key].sendUTF(JSON.stringify({board: board, turn: firstTurn}))
-        console.log('sent each to: ', clients[key])
+        console.log('sent each to: ', client[key])
     }
     connection.on('message', (each) => {
         // console.log(each)
@@ -59,7 +59,7 @@ wsServer.on('request', (request) => {
             // console.log('currentTurnAfterChange', currentTurn, countTurn)
             for(key in client){
                 client[key].sendUTF(JSON.stringify({board: board, turn: currentTurn}))
-                // console.log('sent each to: ', clients[key])
+                // console.log('sent each to: ', client[key])
             }
         }
     })
