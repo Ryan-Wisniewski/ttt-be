@@ -1,4 +1,4 @@
-const PORT = process.env.PORT || 8000
+const PORT = 8000
 const webSocketServer = require('websocket').server
 const http = require('http')
 const Game = require('./mainGame')
@@ -36,7 +36,7 @@ wsServer.on('request', (request) => {
     console.log('connected: ' + userID + 'in' + Object.getOwnPropertyNames(client))
     for(key in client){
         client[key].sendUTF(JSON.stringify({board: board, turn: firstTurn}))
-        console.log('sent each to: ', client[key])
+        // console.log('sent each to: ', client[key])
     }
     connection.on('message', (each) => {
         // console.log(each)
