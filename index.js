@@ -5,16 +5,16 @@ const Game = require('./mainGame')
 
 const server = http.createServer()
 server.listen(PORT)
-console.log('Server listening on port 8000...')
+console.log('Server listening...')
 
 let newGame = new Game()
 let board = newGame.board
 // console.log(board)
 
 const firstTurn = 0
-console.log(firstTurn)
+// console.log(firstTurn)
 let countTurn = 0
-console.log(countTurn)
+// console.log(countTurn)
 const wsServer = new webSocketServer({
     httpServer: server
 })
@@ -33,18 +33,17 @@ wsServer.on('request', (request) => {
 
     const connection = request.accept(null, request.origin)
     client[userID] = connection
-    // console.log('HEEEERRRRRRRRRRRREEEEEEEEEE',client[userID])
     console.log('connected: ' + userID + 'in' + Object.getOwnPropertyNames(client))
     for(key in client){
         client[key].sendUTF(JSON.stringify({board: board, turn: firstTurn}))
-        // console.log('sent each to: ', clients[key])
+        console.log('sent each to: ', clients[key])
     }
     connection.on('message', (each) => {
         // console.log(each)
         if(each.type === 'utf8'){
             let newData = JSON.parse(each.utf8Data)
             let currentTurn = newData.turn
-            console.log('Recieved turn', each.utf8Data, currentTurn)
+            // console.log('Recieved turn', each.utf8Data, currentTurn)
             if(currentTurn === 1){
                 // console.log('REEEEE')
                 currentTurn = 0
